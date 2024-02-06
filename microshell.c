@@ -33,12 +33,12 @@ int exec(char **argv, int i, char **envp)
 		if (has_pipe && (dup2(fd[1], 1) == -1 || close(fd[0] == -1 || close(fd[1]) == -1)))
 			return err("error: fatal\n");
 		execve(*argv, argv, envp);
-		return err("error: cannot execute"), err(*argv), err("\n");
+		return err("error: cannot execute "), err(*argv), err("\n");
 	}
 
 	waitpid(pid, &status, 0);
 	if (has_pipe && (dup2(fd[0], 0) == -1 || close(fd[0] == -1 || close(fd[1]) == -1)))
-		err("error: fatal\n");	
+		return err("error: fatal\n");	
 	return WIFEXITED(status) && WEXITSTATUS(status);
 }
 
